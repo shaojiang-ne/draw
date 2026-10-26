@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg: #FFFFFF;
+    --color-bg-secondary: #F8FAFC;
+    --color-bg-tertiary: #F1F5F9;
+    --color-border: #E2E8F0;
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-tertiary: #94A3B8;
+    --color-accent: #2563EB;
+    --color-accent-hover: #1D4ED8;
+    --color-success: #059669;
+    --color-warning: #D97706;
+    --color-error: #DC2626;
+  }
+
+  .dark {
+    --color-bg: #0F172A;
+    --color-bg-secondary: #1E293B;
+    --color-bg-tertiary: #334155;
+    --color-border: #475569;
+    --color-text-primary: #F1F5F9;
+    --color-text-secondary: #CBD5E1;
+    --color-text-tertiary: #64748B;
+    --color-accent: #3B82F6;
+    --color-accent-hover: #60A5FA;
+    --color-success: #34D399;
+    --color-warning: #FBBF24;
+    --color-error: #F87171;
+  }
+
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+  }
+}
+
+/* Slim themed scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-tertiary);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Workspace draggable vertical splitter */
+.workspace-splitter-v {
+  position: relative;
+  width: 6px;
+  cursor: col-resize;
+  flex-shrink: 0;
+  z-index: 10;
+  background: var(--color-border);
+  transition: background-color 0.15s ease;
+}
+
+.workspace-splitter-v:hover {
+  background: var(--color-accent);
+}
+
+.workspace-splitter-v:active {
+  background: var(--color-accent-hover);
+}
+
+.workspace-splitter-thumb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--color-text-tertiary);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.workspace-splitter-v:hover .workspace-splitter-thumb,
+.workspace-splitter-v:active .workspace-splitter-thumb {
+  opacity: 1;
+  background: white;
+}

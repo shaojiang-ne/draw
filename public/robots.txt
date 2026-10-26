@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 部署后把下面一行替换为实际域名并取消注释
+# Sitemap: https://your-domain.com/sitemap.xml

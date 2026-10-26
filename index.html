@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO 基础标签 ===== -->
+  <title>AI 绘图 - 用一句话生成专业图表 | 流程图·架构图·思维导图在线制作</title>
+  <meta name="description" content="AI 绘图是一款免费在线图表生成工具。用自然语言描述需求，AI 专家流程自动构思、绘制并校验，秒级生成流程图、系统架构图、网络拓扑图、思维导图、甘特图、数据统计图等 9 大类 77 种专业图表，支持 SVG/PNG 导出与对话式修改。" />
+  <meta name="keywords" content="AI绘图,AI图表生成,流程图在线制作,思维导图,架构图,网络拓扑图,甘特图,SVG生成,AI画图,在线绘图工具" />
+  <meta name="author" content="AI 绘图" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#2563EB" />
+  <meta name="google-site-verification" content="IB1nSKgM-6sK3Wv7AhpY4d07YU5vResOfej7ljmAvZk" />
+  <!-- 部署后请把下面的示例域名替换为实际域名，并取消 canonical 注释 -->
+  <!-- <link rel="canonical" href="https://your-domain.com/" /> -->
+
+  <!-- ===== Open Graph（微信/QQ/Facebook 等分享） ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI 绘图 - 用一句话生成专业图表" />
+  <meta property="og:description" content="自然语言描述需求，AI 专家流程秒级生成流程图、架构图、思维导图等 77 种专业图表，支持对话式修改与 SVG/PNG 导出。" />
+  <meta property="og:locale" content="zh_CN" />
+  <!-- <meta property="og:url" content="https://your-domain.com/" /> -->
+  <!-- <meta property="og:image" content="https://your-domain.com/og-cover.png" /> -->
+
+  <!-- ===== Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI 绘图 - 用一句话生成专业图表" />
+  <meta name="twitter:description" content="自然语言描述需求，AI 专家流程秒级生成 77 种专业图表，支持对话式修改与 SVG/PNG 导出。" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- ===== 结构化数据（Google 富摘要） ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI 绘图",
+    "alternateName": "AI Draw",
+    "description": "用自然语言生成专业图表的在线工具。AI 专家流程自动构思、绘制并校验，支持流程图、架构图、思维导图、甘特图等 9 大类 77 种图表。",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "zh-CN",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+    "featureList": "自然语言生成图表,对话式修改,9大类77种图表类型,160+专业模板,6种视觉风格,SVG/PNG导出,实时流式预览,版本管理"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --bg-soft: #F8FAFC;
+      --bg-mute: #F1F5F9;
+      --border: #E2E8F0;
+      --text: #0F172A;
+      --text-2: #475569;
+      --text-3: #94A3B8;
+      --accent: #2563EB;
+      --accent-dark: #1D4ED8;
+      --accent-soft: #EFF6FF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .icon svg { display: block; }
+    .logo-badge svg { width: 16px; height: 16px; }
+    .hero-tag svg { width: 13px; height: 13px; }
+    .feature .icon svg { width: 20px; height: 20px; }
+    .cat .icon svg { width: 18px; height: 18px; }
+
+    /* ===== 导航 ===== */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { display: flex; align-items: center; height: 60px; }
+    .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; text-decoration: none; color: var(--text); }
+    .logo-badge {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 15px;
+    }
+    .nav-links { margin-left: auto; display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color .15s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.btn-primary,
+    .nav-links a.btn-primary:hover { color: #fff; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: all .15s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,.3); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text-2); background: #fff; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== Hero ===== */
+    .hero { padding: 96px 0 80px; text-align: center; background:
+      radial-gradient(600px 300px at 50% -60px, rgba(37,99,235,.08), transparent); }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 13px; font-weight: 600; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -1px; line-height: 1.25; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p.sub { margin: 20px auto 0; max-width: 640px; color: var(--text-2); font-size: 17px; }
+    .hero-actions { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-actions .btn { padding: 13px 30px; font-size: 15px; border-radius: 10px; }
+    .hero-stats { margin-top: 56px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .stat b { display: block; font-size: 28px; font-weight: 800; color: var(--text); }
+    .stat span { font-size: 13px; color: var(--text-3); }
+
+    /* ===== 分区通用 ===== */
+    section { padding: 72px 0; }
+    .section-title { text-align: center; margin-bottom: 48px; }
+    .section-title h2 { font-size: 30px; font-weight: 800; letter-spacing: -.5px; }
+    .section-title p { margin-top: 10px; color: var(--text-2); font-size: 15px; }
+
+    /* ===== 特性 ===== */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .feature {
+      padding: 26px 24px; border: 1px solid var(--border); border-radius: 14px;
+      background: var(--bg); transition: all .2s;
+    }
+    .feature:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(15,23,42,.06); transform: translateY(-3px); }
+    .feature .icon {
+      width: 42px; height: 42px; border-radius: 10px; margin-bottom: 16px;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature p { font-size: 13.5px; color: var(--text-2); }
+
+    /* ===== 分类 ===== */
+    .cats-section { background: var(--bg-soft); }
+    .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .cat {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 18px; background: #fff;
+      border: 1px solid var(--border); border-radius: 12px; transition: all .2s;
+    }
+    .cat:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(15,23,42,.05); }
+    .cat .icon {
+      width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+      background: var(--bg-mute); color: var(--accent);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .cat b { display: block; font-size: 14px; }
+    .cat span { font-size: 12px; color: var(--text-3); }
+
+    /* ===== 工作流程 ===== */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; counter-reset: step; }
+    .step { position: relative; padding: 28px 24px; border-radius: 14px; background: var(--bg-soft); border: 1px solid var(--border); }
+    .step::before {
+      counter-increment: step; content: counter(step, decimal-leading-zero);
+      display: block; font-size: 34px; font-weight: 800; color: var(--accent);
+      opacity: .25; margin-bottom: 12px; line-height: 1;
+    }
+    .step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 13.5px; color: var(--text-2); }
+
+    /* ===== CTA ===== */
+    .cta {
+      margin: 0 auto; max-width: 880px; text-align: center;
+      padding: 64px 32px; border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+    }
+    .cta h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta p { opacity: .85; margin-bottom: 28px; }
+    .cta .btn { background: #fff; color: var(--accent); padding: 13px 32px; font-size: 15px; border-radius: 10px; }
+    .cta .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+    /* ===== 页脚 ===== */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 72px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer p { font-size: 13px; color: var(--text-3); }
+    footer nav { height: auto; display: flex; gap: 20px; }
+    footer a { font-size: 13px; color: var(--text-2); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ===== Hero 生成演示动画 ===== */
+    .demo-window {
+      margin: 48px auto 0; max-width: 880px; text-align: left;
+      border: 1px solid var(--border); border-radius: 16px;
+      background: #fff; box-shadow: 0 20px 50px rgba(15,23,42,.08);
+      overflow: hidden;
+    }
+    .demo-titlebar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: var(--bg-soft);
+    }
+    .demo-dots { display: flex; gap: 6px; }
+    .demo-dots i { width: 10px; height: 10px; border-radius: 50%; }
+    .demo-dots i:nth-child(1) { background: #F87171; }
+    .demo-dots i:nth-child(2) { background: #FBBF24; }
+    .demo-dots i:nth-child(3) { background: #34D399; }
+    .demo-title { font-size: 12px; color: var(--text-3); }
+    .demo-body { display: flex; min-height: 340px; }
+    .demo-chat {
+      width: 250px; flex-shrink: 0; padding: 18px 16px;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .demo-input {
+      min-height: 64px; padding: 10px 12px;
+      border: 1px solid var(--border); border-radius: 10px;
+      font-size: 13px; color: var(--text); line-height: 1.5;
+      background: var(--bg-soft);
+    }
+    .demo-cursor {
+      display: inline-block; width: 2px; height: 14px;
+      background: var(--accent); vertical-align: -2px;
+      animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .demo-steps { display: flex; flex-direction: column; gap: 8px; }
+    .demo-steps-label { font-size: 11px; color: var(--text-3); }
+    .demo-step {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12.5px; color: var(--text-3);
+      opacity: .45; transition: all .25s ease;
+    }
+    .demo-step i {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-style: normal; font-size: 10px; color: transparent;
+      transition: all .25s ease; flex-shrink: 0;
+    }
+    .demo-step.done { opacity: 1; color: var(--text-2); }
+    .demo-step.done i { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .demo-step.done i::before { content: "✓"; }
+    .demo-canvas {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 20px; background:
+        radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 1px) 0 0 / 22px 22px;
+    }
+    .demo-svg { width: 100%; max-width: 460px; height: auto; }
+    .demo-svg .node { opacity: 0; transform: translateY(10px); }
+    .demo-svg .edge { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .demo-svg .edge-label { opacity: 0; }
+    .demo-svg.play .node { animation: nodeIn .45s cubic-bezier(.2,.8,.3,1.2) forwards; }
+    .demo-svg.play .edge { animation: drawLine .45s linear forwards; }
+    .demo-svg.play .edge-label { animation: fadeIn .3s ease forwards; }
+    @keyframes nodeIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .demo-svg .node, .demo-svg .edge-label { opacity: 1 !important; transform: none !important; animation: none !important; }
+      .demo-svg .edge { stroke-dashoffset: 0 !important; animation: none !important; }
+      .demo-cursor { animation: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding: 64px 0 56px; }
+      .hero-stats { gap: 28px; }
+      .demo-body { flex-direction: column; }
+      .demo-chat { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SVG 图标库（Lucide 风格，stroke 描边图标） ===== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+        <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+      </symbol>
+      <symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </symbol>
+      <symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </symbol>
+      <symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
+        <path d="m15 5 4 4"/>
+      </symbol>
+      <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+      </symbol>
+      <symbol id="i-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="7" x="3" y="3" rx="1"/>
+        <rect width="9" height="7" x="3" y="14" rx="1"/>
+        <rect width="5" height="7" x="16" y="14" rx="1"/>
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>
+      </symbol>
+      <symbol id="i-git-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" x2="6" y1="3" y2="15"/>
+        <circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <path d="M18 9a9 9 0 0 1-9 9"/>
+      </symbol>
+      <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/>
+        <path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/>
+        <path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
+      </symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </symbol>
+      <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+        <path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>
+      </symbol>
+      <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>
+      </symbol>
+      <symbol id="i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 7l-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/>
+      </symbol>
+      <symbol id="i-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>
+      </symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+        <path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ===== 导航栏 ===== -->
+  <header>
+    <nav class="container" aria-label="主导航">
+      <a class="logo" href="/">
+        <span class="logo-badge" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-sparkles"/></svg></span>
+        AI 绘图
+      </a>
+      <div class="nav-links">
+        <a href="#features">功能特性</a>
+        <a href="#categories">图表类型</a>
+        <a href="#how">使用流程</a>
+        <a class="btn btn-primary" href="/app/">立即使用</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container">
+        <span class="hero-tag"><svg class="" aria-hidden="true"><use href="#i-sparkles"/></svg> AI 驱动的专业图表生成工具</span>
+        <h1>用一句话，<em>生成专业图表</em></h1>
+        <p class="sub">
+          无需学习复杂的绘图软件。用自然语言描述你的需求，AI 专家流程自动完成
+          需求解析、布局规划、绘制与自检，秒级产出可直接使用的专业图表。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/app/">免费开始绘图 →</a>
+          <a class="btn btn-ghost" href="#categories">浏览图表类型</a>
+        </div>
+
+        <!-- AI 生成过程演示动画 -->
+        <div class="demo-window" aria-hidden="true">
+          <div class="demo-titlebar">
+            <span class="demo-dots"><i></i><i></i><i></i></span>
+            <span class="demo-title">AI 绘图 · 实时生成演示</span>
+          </div>
+          <div class="demo-body">
+            <div class="demo-chat">
+              <div class="demo-input"><span id="demoPrompt"></span><span class="demo-cursor" id="demoCursor"></span></div>
+              <div class="demo-steps">
+                <span class="demo-steps-label">专家流程</span>
+                <div class="demo-step"><i></i>需求解析</div>
+                <div class="demo-step"><i></i>布局规划</div>
+                <div class="demo-step"><i></i>绘制节点与连线</div>
+                <div class="demo-step"><i></i>自检与修正</div>
+              </div>
+            </div>
+            <div class="demo-canvas">
+              <svg class="demo-svg" id="demoSvg" viewBox="0 0 520 320" fill="none">
+                <!-- 连线（pathLength=1 配合 dashoffset 实现画线动画） -->
+                <path class="edge" style="animation-delay:.35s" pathLength="1" d="M260 56 L260 92" stroke="#94A3B8" stroke-width="1.5"/>
+                <path class="edge" style="animation-delay:1.05s" pathLength="1" d="M260 132 L260 168" stroke="#94A3B8" stroke-width="1.5"/>
+                <path class="edge" style="animation-delay:1.75s" pathLength="1" d="M244 208 L140 252" stroke="#94A3B8" stroke-width="1.5"/>
+                <path class="edge" style="animation-delay:1.75s" pathLength="1" d="M276 208 L380 252" stroke="#94A3B8" stroke-width="1.5"/>
+                <text class="edge-label" style="animation-delay:2.1s" x="222" y="236" font-size="11" fill="#059669">成功</text>
+                <text class="edge-label" style="animation-delay:2.1s" x="372" y="236" font-size="11" fill="#DC2626">失败</text>
+                <!-- 节点 -->
+                <g class="node" style="animation-delay:0s">
+                  <rect x="200" y="16" width="120" height="40" rx="20" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+                  <text x="260" y="41" font-size="13" fill="#1E40AF" text-anchor="middle">开始</text>
+                </g>
+                <g class="node" style="animation-delay:.7s">
+                  <rect x="200" y="92" width="120" height="40" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+                  <text x="260" y="117" font-size="13" fill="#1E40AF" text-anchor="middle">输入账号密码</text>
+                </g>
+                <g class="node" style="animation-delay:1.4s">
+                  <rect x="200" y="168" width="120" height="40" rx="8" fill="#FEF9C3" stroke="#D97706" stroke-width="1.5"/>
+                  <text x="260" y="193" font-size="13" fill="#92400E" text-anchor="middle">验证凭据</text>
+                </g>
+                <g class="node" style="animation-delay:2.1s">
+                  <rect x="80" y="252" width="120" height="40" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5"/>
+                  <text x="140" y="277" font-size="13" fill="#065F46" text-anchor="middle">登录成功</text>
+                </g>
+                <g class="node" style="animation-delay:2.1s">
+                  <rect x="320" y="252" width="120" height="40" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                  <text x="380" y="277" font-size="13" fill="#991B1B" text-anchor="middle">提示错误</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><b>9 大类</b><span>图表分类体系</span></div>
+          <div class="stat"><b>77 种</b><span>专业图表子类型</span></div>
+          <div class="stat"><b>160+</b><span>内置精品模板</span></div>
+          <div class="stat"><b>6 套</b><span>视觉风格预设</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 功能特性 ===== -->
+    <section id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>为什么选择 AI 绘图</h2>
+          <p>不只是生成，更是一套完整的专家级绘图工作流</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-message"/></svg></div>
+            <h3>自然语言生成</h3>
+            <p>用一句话描述你想要的图表，AI 自动理解业务场景并生成结构合理、内容专业的图表。</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-shield-check"/></svg></div>
+            <h3>专家流程校验</h3>
+            <p>每类图表都有专属专家流程：需求解析、布局规划、符号选择、连线绘制、自检修正，质量有保障。</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-pencil"/></svg></div>
+            <h3>对话式修改</h3>
+            <p>生成后可以继续用自然语言调整：改布局、换配色、增删节点，版本自动保存，随时回退。</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-zap"/></svg></div>
+            <h3>实时流式预览</h3>
+            <p>图表边生成边渲染，AI 的思考过程实时可见，无需等待即可看到图表逐步成形。</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-layout"/></svg></div>
+            <h3>风格与模板</h3>
+            <p>6 套精心调校的视觉风格，160+ 行业模板一键复用，从空白开始或站在模板肩膀上都可以。</p>
+          </article>
+          <article class="feature">
+            <div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-download"/></svg></div>
+            <h3>多格式导出</h3>
+            <p>一键导出 SVG 矢量图或 PNG 位图，也可以直接复制代码嵌入文档、Wiki 或演示文稿。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 图表类型 ===== -->
+    <section id="categories" class="cats-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>覆盖 9 大类专业图表</h2>
+          <p>77 种图表子类型，满足不同行业与场景的绘图需求</p>
+        </div>
+        <div class="cats">
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-git-branch"/></svg></div><div><b>流程图</b><span>10 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-cpu"/></svg></div><div><b>IT 软件与系统架构</b><span>13 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-globe"/></svg></div><div><b>网络与机房拓扑</b><span>6 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-settings"/></svg></div><div><b>工程工业图纸</b><span>8 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-building"/></svg></div><div><b>建筑空间平面图</b><span>8 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-clipboard"/></svg></div><div><b>项目管理类图表</b><span>7 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-trending"/></svg></div><div><b>商业分析逻辑图</b><span>9 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-bar-chart"/></svg></div><div><b>数据统计图表</b><span>7 种子类型</span></div></div>
+          <div class="cat"><div class="icon" aria-hidden="true"><svg class="" aria-hidden="true"><use href="#i-cap"/></svg></div><div><b>教育/生活/设计特色图</b><span>9 种子类型</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 使用流程 ===== -->
+    <section id="how">
+      <div class="container">
+        <div class="section-title">
+          <h2>三步得到一张专业图表</h2>
+          <p>从零到可用，不超过一分钟</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <h3>选择图表类型</h3>
+            <p>从 9 大分类中选择合适的图表类型，挑选喜欢的视觉风格，也可以直接套用行业模板。</p>
+          </article>
+          <article class="step">
+            <h3>描述你的需求</h3>
+            <p>用一句自然语言说明要画什么，AI 专家流程自动完成构思、绘制与多轮自检。</p>
+          </article>
+          <article class="step">
+            <h3>调整并导出</h3>
+            <p>继续对话微调细节，满意后导出 SVG/PNG 或复制代码，嵌入任何文档中。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section>
+      <div class="container">
+        <div class="cta">
+          <h2>现在就开始，让 AI 替你画图</h2>
+          <p>免费使用 · 无需安装 · 打开浏览器即可创作</p>
+          <a class="btn" href="/app/">免费开始绘图 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 页脚 ===== -->
+  <footer>
+    <div class="container">
+      <p>© 2026 AI 绘图 · 用自然语言生成专业图表</p>
+      <nav aria-label="页脚导航">
+        <a href="#features">功能特性</a>
+        <a href="#categories">图表类型</a>
+        <a href="/app/">进入应用</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== Hero 演示动画脚本 ===== -->
+  <script>
+  (function () {
+    var PROMPT = '帮我画一个用户登录的流程图';
+    var promptEl = document.getElementById('demoPrompt');
+    var cursor = document.getElementById('demoCursor');
+    var svg = document.getElementById('demoSvg');
+    var steps = Array.prototype.slice.call(document.querySelectorAll('.demo-step'));
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    if (reduced) {
+      // 尊重减弱动效设置：直接呈现最终状态
+      promptEl.textContent = PROMPT;
+      cursor.style.display = 'none';
+      steps.forEach(function (s) { s.classList.add('done'); });
+      svg.classList.add('play');
+      return;
+    }
+
+    async function loop() {
+      while (true) {
+        // 重置
+        svg.classList.remove('play');
+        steps.forEach(function (s) { s.classList.remove('done'); });
+        promptEl.textContent = '';
+        cursor.style.display = 'inline-block';
+        await sleep(800);
+
+        // 逐字输入提示词
+        for (var i = 0; i < PROMPT.length; i++) {
+          promptEl.textContent += PROMPT[i];
+          await sleep(60);
+        }
+        cursor.style.display = 'none';
+        await sleep(400);
+
+        // 专家步骤逐个完成
+        for (var j = 0; j < steps.length; j++) {
+          steps[j].classList.add('done');
+          await sleep(500);
+        }
+        await sleep(300);
+
+        // SVG 逐节点绘制（CSS 动画，重绘前强制 reflow 以便循环播放）
+        void svg.offsetWidth;
+        svg.classList.add('play');
+        await sleep(6000);
+      }
+    }
+    loop();
+  })();
+  </script>
+</body>
+</html>
